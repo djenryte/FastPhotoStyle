@@ -33,24 +33,28 @@ class PhotoWCT(nn.Module):
         sF4 = sF4.data.squeeze(0)
         cF4 = cF4.data.squeeze(0)
         csF4 = self.__feature_wct(cF4, sF4, cont_seg, styl_seg)
+        csF4 = Variable(csF4)
         Im4 = self.d4(csF4, cpool_idx, cpool1, cpool_idx2, cpool2, cpool_idx3, cpool3)
         
         cF3, cpool_idx, cpool1, cpool_idx2, cpool2 = self.e3(Im4)
         sF3 = sF3.data.squeeze(0)
         cF3 = cF3.data.squeeze(0)
         csF3 = self.__feature_wct(cF3, sF3, cont_seg, styl_seg)
+        csF3 = Variable(csF3)
         Im3 = self.d3(csF3, cpool_idx, cpool1, cpool_idx2, cpool2)
         
         cF2, cpool_idx, cpool = self.e2(Im3)
         sF2 = sF2.data.squeeze(0)
         cF2 = cF2.data.squeeze(0)
         csF2 = self.__feature_wct(cF2, sF2, cont_seg, styl_seg)
+        csF2 = Variable(csF2)
         Im2 = self.d2(csF2, cpool_idx, cpool)
         
         cF1 = self.e1(Im2)
         sF1 = sF1.data.squeeze(0)
         cF1 = cF1.data.squeeze(0)
         csF1 = self.__feature_wct(cF1, sF1, cont_seg, styl_seg)
+        csF1 = Variable(csF1)
         Im1 = self.d1(csF1)
         return Im1
     
